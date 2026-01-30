@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="author" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <link href="css/bootstrap.rtl.min.css" rel="stylesheet"/>
+    <link href="css/styles.css" rel="stylesheet"/>
+
+    <!-- JS -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/file_openai.js"></script>
+    
+</head>
+<body lang="he" dir="rtl">
+
+<!-- CHAT UI (Bootstrap only) -->
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+
+            <div class="card shadow-sm">
+                <!-- כותרת -->
+                <div class="card-header bg-white">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center gap-2">
+                            <div>
+                                <div class="fw-semibold">צ'אט תכנון טיול</div>
+                                <div class="small text-muted">ניתן להעלות קובץ PDF עם מידע על מקום (שמורת טבע, מדינה,
+                                    איזור) ולהתייעץ עם הצ'אט
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- הודעות -->
+                <div class="card-body p-0">
+                    <div class="bg-light">
+                        <div class="p-3 overflow-auto" style="height: 520px;" id="chatWindow">
+
+                            <!-- רשימת הודעות -->
+                            <ul id="questions" class="list-unstyled m-0 d-flex flex-column gap-2"></ul>
+
+                            <!-- הודעת פתיחה -->
+                            <div id="start" class="alert alert-light border mt-2 mb-0">
+                                <span class="text-muted">העלה/י PDF כדי להתחיל.</span>
+                            </div>
+
+                        </div>
+
+                        <!-- מסך טעינה -->
+                        <div id="loading" class="text-center d-none py-3 bg-white border-top">
+                            <div class="spinner-border text-success" role="status">
+                                <span class="visually-hidden">טוען...</span>
+                            </div>
+                            <div class="small text-muted mt-2">מנסח תשובה…</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- טופס השאלה והקובץ -->
+                <div class="card-footer bg-white">
+                    <form id="uploadFileForm" class="row g-2 flex-column" onsubmit="uploadFile(event)">
+                        <div class="mb-1">
+                            <label for="pdfFile" class="form-label">בחירת קובץ</label>
+                            <input class="form-control" type="file" id="pdfFile">
+                        </div>
+
+                        <button id="uploadFileBtn" type="submit" class="btn btn-success">
+                            שליחה
+                        </button>
+                    </form>
+                    <form id="chatForm" class="row g-2 flex-column d-none" onsubmit="sendQuestion(event)">
+                        <div class="mb-3">
+                            <label for="question" class="form-label">שאלה</label>
+                            <input type="text" class="form-control" id="question" aria-describedby="שאלה"
+                                   placeholder="הקלידו הודעה…">
+                        </div>
+
+                        <button id="getDataBtn" type="submit" class="btn btn-success">
+                            שליחה
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
